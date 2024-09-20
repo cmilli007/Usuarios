@@ -1,10 +1,21 @@
 <?php
 $servidor = "localhost";
 $user="root";
-$password = "root"
+$password = "root";
 $bd = "bd_Sustentech";
-$conn = new mysqli($servidor, $user, $password $bd);
+$conn = new mysqli($servidor, $user, $password, $bd);
 
+
+$insert = "INSERT INTO tb_empresas VALUES (NULL,'$nm_empresa','$cnpj_empresa','$nr_endereco''$nm_endereco','$email','$nr_cep','$nr_telefone','$nm_responsavel','$cargo_responsavel','$email_responsavel','$ds_servico','$senha' '$ConfirmaSenha ')";
+
+$query = mysqli_query($conn, $insert);
+ 
+if ($query) {
+    echo "Inserido com sucesso";
+} else {
+    echo "Erro ao inserir: " . mysqli_error($conexao);
+}
+ 
 if(!$conn){
 
  echo "<p style=' color:red; text-align:center; font-size:25px;'Erro de conexão!>/p>";
@@ -23,7 +34,7 @@ if($_SERVER ["REQUEST_METHOD"=="POST"]){
     $nm_responsavel = $_POST ["nm_responsavel"];
     $cargo_responsavel = $_POST ["cargo_responsavel"];
     $email_responsavel = $_POST ["email_responsavel "];
-    $ds_serico = $_POST ["ds_serico"];
+    $ds_servico = $_POST ["ds_servico"];
     $senha = $_POST ["senha"];
     $ConfirmaSenha = $_POST ["ConfirmaSenha"];
 

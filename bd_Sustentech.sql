@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `bd_sustentech`.`tb_vendedores` (
   `nr_cep` CHAR(8) NOT NULL,
   `sg_estado` VARCHAR(2) NOT NULL,
   `nr_telefone` CHAR(9) NOT NULL,
-  `senha` VARCHAR(45) NOT NULL,
+  `senha` TEXT NOT NULL,
   `login` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`cd_cliente`))
 ENGINE = InnoDB;
@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `bd_sustentech`.`tb_empresa` (
   `email_responsavel` VARCHAR(45) NOT NULL,
   `atividade_economica` CHAR(7) NULL,
   `usuario` VARCHAR(45) NOT NULL,
-  `senha` VARCHAR(45) NOT NULL,
+  `senha` TEXT NOT NULL,
   `ds_servico` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`cd_empresa`))
 ENGINE = InnoDB;
@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `bd_sustentech`.`tb_Cooperativa` (
   `nr_cep` CHAR(8) NOT NULL,
   `ds_itensRecebidos` VARCHAR(45) NOT NULL,
   `user` VARCHAR(45) NOT NULL,
-  `senha` VARCHAR(45) NOT NULL,
+  `senha` TEXT NOT NULL,
   PRIMARY KEY (`cd_corporativa`))
 ENGINE = InnoDB;
 

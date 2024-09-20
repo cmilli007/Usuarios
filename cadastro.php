@@ -1,9 +1,20 @@
 <?php
 $servidor = "localhost";
 $user="root";
-$password = "root"
-$bd = "bd_Sustentech";
-$conn = new mysqli($servidor, $user, $password $bd);
+$password = "root";
+$banco = "bd_Sustentech";
+$conn = new mysqli($servidor, $user, $password,  $banco);
+
+$insert = "INSERT INTO tb_vendedores VALUES (NULL,'$nm_cliente','$nm_endereco','$nr_endereco','$email','$nr_cep','$nr_telefone','$senha' '$ConfirmaSenha ')";
+
+$query = mysqli_query($conn, $insert);
+ 
+if ($query) {
+    echo "Inserido com sucesso";
+} else {
+    echo "Erro ao inserir: " . mysqli_error($conexao);
+}
+ 
 
 if(!$conn){
 
@@ -11,8 +22,7 @@ if(!$conn){
  echo"<h2 style = 'color:green; text-align:center; font-size:25px'><a href= 'usuario.html'>VOLTAR<a></h2>";
 
 }
-
-if($_SERVER ["REQUEST_METHOD"=="POST"]){
+if($_SERVER['REQUEST_METHOD'] === 'POST'){
  
     $nm_cliente = $_POST ["nm_cliente"];
     $email = $_POST ["email"];
@@ -35,7 +45,7 @@ if($_SERVER ["REQUEST_METHOD"=="POST"]){
             echo"<h2 style = 'color:green; text-align:center; font-size:25px'><a href= 'usuario.html'>VOLTAR<a></h2>";
         } else {
 
-            $hashsenha = password_hash($senha, PASSWORD_BCRYPT);
+            $hashsenha = password_hash($senha, PASSWORD_DEFAULT);
             $sql = "INSERT INTO  tb_vendedores (nm_cliente, senha) values ('$nm_cliente' ,  '$hashsenha')";
         $retorno = mysqli_query ($conn, $sql);
         
