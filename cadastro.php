@@ -22,7 +22,7 @@ if(!$conn){
  echo"<h2 style = 'color:green; text-align:center; font-size:25px'><a href= 'usuario.html'>VOLTAR<a></h2>";
 
 }
-if($_SERVER['REQUEST_METHOD'] === 'POST'){
+if($_SERVER['REQUEST_METHOD'] ==x= 'POST'){
  
     $nm_cliente = $_POST ["nm_cliente"];
     $email = $_POST ["email"];

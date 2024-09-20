@@ -23,7 +23,7 @@ if(!$conn){
 
 }
 
-if($_SERVER ["REQUEST_METHOD"=="POST"]){
+if($_SERVER['REQUEST_METHOD'] === 'POST'){
  
     $nm_empresa = $_POST ["nm_empresa"];
     $cnpj_empresa = $_POST ["cnpj_empresa"];
