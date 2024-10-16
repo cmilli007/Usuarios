@@ -44,20 +44,18 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `bd_sustentech`.`tb_empresa` (
   `cd_empresa` INT NOT NULL AUTO_INCREMENT,
   `nm_empresa` VARCHAR(255) NOT NULL,
-  `cpnj_empresa` CHAR(14) NOT NULL,
+  `cnpj_empresa` CHAR(14) NOT NULL,
   `nm_endereco` VARCHAR(45) NOT NULL,
   `nr_endereco` CHAR(4) NOT NULL,
   `nr_cep` CHAR(8) NOT NULL,
   `nr_telefone` CHAR(9) NOT NULL,
-  `email` VARCHAR(45) NOT NULL,
   `nm_responsavel` VARCHAR(45) NOT NULL,
   `cargo_responsavel` VARCHAR(45) NOT NULL,
   `email_responsavel` VARCHAR(45) NOT NULL,
-  `atividade_economica` CHAR(7) NULL,
-  `usuario` VARCHAR(45) NOT NULL,
   `senha` TEXT NOT NULL,
   `ds_servico` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`cd_empresa`))
+  ALTER TABLE tb_empresa CHANGE cpnj_empresa cnpj_empresa VARCHAR(14);
 ENGINE = InnoDB;
 
 
