@@ -4,17 +4,17 @@ $user = "root";
 $password = "root";
 $bd = "bd_Sustentech";
 
-// Criando a conexão
+
 $conn = new mysqli($servidor, $user, $password, $bd);
 
-// Verificando a conexão
+
 if ($conn->connect_error) {
     die("<p style='color:red; text-align:center; font-size:25px;'>Erro de conexão!</p>");
 }
 
-// Verifica se o formulário foi enviado com método POST
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Capturando dados do formulário
+   
     $nm_empresa = ($_POST["nm_empresa"]);
     $cnpj_empresa = ($_POST["cnpj_empresa"]);
     $nm_endereco = ($_POST["nm_endereco"]);
@@ -54,7 +54,7 @@ if ($query) {
     echo "<p style='color:green; text-align:center; font-size:25px;'>Cadastro Realizado!</p>";
     echo "<h2 style='color:green; text-align:center; font-size:25px;'><a href='usuarios_empresas.html'>VOLTAR</a></h2>";
 } else {
-    // Exibe qualquer erro de inserção
+  
     echo "Erro ao inserir: " . mysqli_error($conn);
 }
 }
@@ -65,6 +65,5 @@ echo "<h2 style='color:green; text-align:center; font-size:25px;'><a href='usuar
 }
 }
 
-// Fecha a conexão
 $conn->close();
 ?>

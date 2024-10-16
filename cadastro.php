@@ -2,24 +2,19 @@
 // Ativar relatórios de erros do MySQLi
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
-// Dados para conexão com o banco
 $servidor = "localhost";
 $user = "root";
 $password = "root";
 $banco = "bd_Sustentech";
 
-// Criando a conexão
 $conn = new mysqli($servidor, $user, $password, $banco);
 
-// Verificando a conexão
 if ($conn->connect_error) {
     die("Erro de conexão: " . $conn->connect_error);
 }
 
-// Verifica se o formulário foi enviado com método POST
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-    // Capturando dados do formulário
     $nm_cliente = ($_POST["nm_cliente"]);
     $email = ($_POST["email"]);
     $nm_endereco = ($_POST["nm_endereco"]);
@@ -31,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $senha = $_POST["senha"];
     $ConfirmaSenha = $_POST["ConfirmaSenha"];
 
-    // Verifica se as senhas coincidem
+ 
     if ($senha === $ConfirmaSenha) {
 
         // Criptografando a senha
@@ -69,6 +64,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
-// Fecha a conexão
 $conn->close();
 ?>
