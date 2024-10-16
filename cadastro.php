@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             if ($query) {
                 echo "<p style='color:green; text-align:center; font-size:25px;'>Cadastro Realizado!</p>";
-                echo "<h2 style='color:green; text-align:center; font-size:25px;'><a href='usuarios.html'>VOLTAR</a></h2>";
+                echo "<h2 style='color:green; text-align:center; font-size:25px;'><a href='login.html'>FAÇA SEU LOGIN</a></h2>";
             } else {
                 // Exibe qualquer erro de inserção
                 echo "Erro ao inserir: " . mysqli_error($conn);

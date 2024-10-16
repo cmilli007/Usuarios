@@ -24,7 +24,7 @@ $products = $stmtProducts->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil do Usuário</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Link para o arquivo CSS -->
+    <link rel="stylesheet" href="style.css"> <!-- Link para o arquivo CSS -->
 </head>
 <body>
     <div class="container">
@@ -37,7 +37,7 @@ $products = $stmtProducts->fetchAll(PDO::FETCH_ASSOC);
             <p><strong>CEP:</strong> <?php echo htmlspecialchars($userData['nr_cep']); ?></p>
         </div>
 
-        <!-- <h2>Meus Produtos</h2>
+         <h2>Meus Produtos</h2>
         <?php if (!empty($products)): ?>
             <?php foreach ($products as $product): ?>
                 <div class="product">
@@ -47,8 +47,7 @@ $products = $stmtProducts->fetchAll(PDO::FETCH_ASSOC);
                     <p><strong>Condição:</strong> <?php echo htmlspecialchars($product['condicao_produto']); ?></p>
                     <p><strong>Descrição:</strong> <?php echo htmlspecialchars($product['ds_produto']); ?></p>
                     <p><strong>Valor:</strong> R$ <?php echo htmlspecialchars($product['vl_produto']); ?></p>
-                </div> -->
-            >
+                </div> 
             <?php endforeach; ?>
         <?php else: ?>
             <p>Nenhum produto cadastrado.</p>

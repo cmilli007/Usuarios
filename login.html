@@ -5,61 +5,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tela de Login</title>
     <style>
-
-body{
-    background-color: #F1FAF1;
-}
-.login
-{
-    font-family: "DM Sans", sans-serif;
-    position: absolute;
-    background-color: #DBFEDD ;
-    text-align: center;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 50px;
-    color: #0D7E2E;
-}
-.body{
-    background-color: #c3f6c3;
-}
-input{
-    padding: 15px;
-    font-size: 18px;
-    width: 90%;
-    margin-bottom: 10px;
-    outline: none;
-}
-.botao{
-    font-family: "DM Sans", sans-serif;
-    margin-top: 20px;
-    width: 70%;
-    height: 40px;
-    cursor: pointer;
-    border-radius: 6%;
-    background-color: #0D7E2E;
-    color: white;
-
-}
-.botao:hover{
-    background-color: #2f5c2c;
-}
-h2{
-    font-family: "DM Sans", sans-serif;
-    padding: 8px;
-    font-size: 40px;
-}
+        body {
+            background-color: #F1FAF1;
+        }
+        .login {
+            font-family: "DM Sans", sans-serif;
+            position: absolute;
+            background-color: #DBFEDD;
+            text-align: center;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 50px;
+            color: #0D7E2E;
+        }
+        input {
+            padding: 15px;
+            font-size: 18px;
+            width: 90%;
+            margin-bottom: 10px;
+            outline: none;
+        }
+        .botao {
+            font-family: "DM Sans", sans-serif;
+            margin-top: 20px;
+            width: 70%;
+            height: 40px;
+            cursor: pointer;
+            border-radius: 6%;
+            background-color: #0D7E2E;
+            color: white;
+        }
+        .botao:hover {
+            background-color: #2f5c2c;
+        }
+        h2 {
+            font-family: "DM Sans", sans-serif;
+            padding: 8px;
+            font-size: 40px;
+        }
     </style>
 </head>
 <body>
     <div class="login">
         <h1>Login</h1>
-        <input type="text" placeholder="Nome">
-        <br>
-        <input type="password" placeholder="Senha">
-        <br>
-        <input class="botao" type="submit" value="Entrar">
+        <form method="POST" action="login.php">
+            <input type="text" name="nm_cliente" placeholder="Nome" required><br>
+
+            <input type="password" name="senha" placeholder="Senha" required> <br>
+
+            <input class="botao" type="submit" value="Entrar">
+        </form>
     </div>
 </body>
 </html>
