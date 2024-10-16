@@ -23,7 +23,7 @@ if(!$conn){
 
 }
 
-if($_SERVER['REQUEST_METHOD'] === 'POST'){
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
  
     $nm_empresa = $_POST ["nm_empresa"];
     $cnpj_empresa = $_POST ["cnpj_empresa"];
@@ -38,7 +38,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $senha = $_POST ["senha"];
     $ConfirmaSenha = $_POST ["ConfirmaSenha"];
 
-    if($senha ====$ConfirmaSenha){
+    if($senha === $ConfirmaSenha){
 
         $sql = "SELECT * FROM  tb_empresa WHERE nm_empresa ='$nm_empresa'";
         $retorno = mysqli_query ($conn, $sql);

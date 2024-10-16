@@ -25,13 +25,16 @@ CREATE TABLE IF NOT EXISTS `bd_sustentech`.`tb_vendedores` (
   `nm_cliente` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   `nm_endereco` VARCHAR(45) NOT NULL,
-  `nr_endereco` CHAR(10) NOT NULL,
+  `nr_endereco` CHAR (10) NOT NULL,
   `nr_cep` CHAR(8) NOT NULL,
   `sg_estado` VARCHAR(2) NOT NULL,
   `nr_telefone` CHAR(9) NOT NULL,
   `senha` TEXT NOT NULL,
   `login` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`cd_cliente`))
+  ALTER TABLE tb_vendedores MODIFY nr_endereco CHAR (10);
+
+
 ENGINE = InnoDB;
 
 
