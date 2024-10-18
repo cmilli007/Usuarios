@@ -1,5 +1,4 @@
 <?php
-// Ativar relatórios de erros do MySQLi
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
 $servidor = "localhost";

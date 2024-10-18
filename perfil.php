@@ -1,9 +1,8 @@
 <?php
-// Conectar ao banco de dados
-include 'conexao.php'; // Inclua seu arquivo de conexão com o banco de dados
+include 'conexao.php'; 
 
 session_start();
-$cd_cliente = $_SESSION['cd_cliente']; // ID do usuário logado
+$cd_cliente = $_SESSION['cd_cliente']; 
 
 // Recuperar informações do usuário
 $queryUser = "SELECT * FROM tb_vendedores WHERE cd_cliente = ?";
@@ -24,7 +23,7 @@ $products = $stmtProducts->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil do Usuário</title>
-    <link rel="stylesheet" href="style.css"> <!-- Link para o arquivo CSS -->
+    <link rel="stylesheet" href="style.css"> 
 </head>
 <body>
     <div class="container">

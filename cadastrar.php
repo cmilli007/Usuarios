@@ -4,9 +4,7 @@ $user = "root";
 $password = "root";
 $bd = "bd_Sustentech";
 
-
 $conn = new mysqli($servidor, $user, $password, $bd);
-
 
 if ($conn->connect_error) {
     die("<p style='color:red; text-align:center; font-size:25px;'>Erro de conexão!</p>");

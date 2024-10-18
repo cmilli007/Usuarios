@@ -1,25 +1,23 @@
 <?php
-session_start(); // Inicia a sessão
+session_start(); 
 
-include 'conexao.php'; // Inclui o arquivo de conexão
+include 'conexao.php'; 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Verifica se os campos estão definidos
+    
     if (isset($_POST['nm_cliente']) && isset($_POST['senha'])) {
         $nm_cliente = $_POST['nm_cliente'];
         $senha = $_POST['senha'];
 
-        // Prepara a consulta para verificar o usuário
         $stmt = $pdo->prepare("SELECT * FROM tb_vendedores WHERE login = :nm_cliente");
         $stmt->execute(['nm_cliente' => $nm_cliente]);        
         $user = $stmt->fetch();
 
         if ($user) {
-            // Verifica se a senha está correta
-            if (password_verify($senha, $user['senha'])) { // Verifica a senha com hash
-                // Se o usuário for encontrado e a senha estiver correta, armazena os dados na sessão
-                $_SESSION['cd_cliente'] = $user['cd_cliente']; // Ajuste conforme necessário
-                header("Location: perfil.php"); // Redireciona para a página de perfil
+            
+            if (password_verify($senha, $user['senha'])) { 
+                $_SESSION['cd_cliente'] = $user['cd_cliente']; 
+                header("Location: perfil.php"); 
                 exit();
             } else {
                 // Se a senha estiver incorreta
