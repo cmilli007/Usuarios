@@ -1,21 +1,24 @@
 <?php
-session_start();
+session_start(); 
+
 include 'conexao.php'; 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     
-    if (isset($_POST['login']) && isset($_POST['senha'])) {
-        $login = $_POST['login'];
+    if (isset($_POST['email']) && isset($_POST['senha'])) {
+        $email = $_POST['email'];
         $senha = $_POST['senha'];
 
-        $stmt = $pdo->prepare("SELECT * FROM tb_usuarios WHERE login = :login");
-        $stmt->execute(['login' => $login]);        
+        // Altere a consulta para usar o email
+        $stmt = $pdo->prepare("SELECT * FROM tb_usuarios WHERE email = :email");
+        $stmt->execute(['email' => $email]);        
         $user = $stmt->fetch();
 
         if ($user) {
+            
             if (password_verify($senha, $user['senha'])) { 
-                $_SESSION['cd_cliente'] = $user['cd_cliente']; // Armazena o ID do usuário logado
-                header("Location: perfil.php"); // Redireciona para a página de perfil
+                $_SESSION['cd_cliente'] = $user['cd_cliente']; 
+                header("Location: perfil.php"); 
                 exit();
             } else {
                 // Se a senha estiver incorreta
