@@ -1,0 +1,59 @@
+body {
+    background-color: #F1FAF1; 
+}
+
+.container {
+    font-family: "DM Sans", sans-serif; 
+    max-width: 800px; 
+    background-color: #ffffff; 
+    margin: 70px auto; 
+    border-radius: 5%; 
+    text-align: center; 
+    padding: 20px; 
+}
+
+h1 {
+    font-size: 36px; 
+    color: #0D7E2E; 
+    margin-bottom: 20px; 
+}
+
+h2 {
+    font-family: "DM Sans", sans-serif; 
+    font-size: 30px; 
+    margin: 20px 0; 
+}
+
+.user-info p {
+    font-size: 18px; 
+    margin: 5px 0; 
+}
+
+.product {
+    border: 1px solid #ccc; 
+    padding: 15px;
+    margin-top: 10px; 
+    border-radius: 5%; 
+    background-color: #c3f6c3; 
+    text-align: left; 
+}
+
+strong {
+    color: #0D7E2E; 
+}
+
+.botao {
+    font-family: "DM Sans", sans-serif; 
+    margin-top: 20px; 
+    width: 70%; 
+    height: 40px; 
+    cursor: pointer; 
+    border-radius: 6%; 
+    background-color: #0D7E2E; 
+    color: white; 
+    border: none; 
+}
+
+.botao:hover {
+    background-color: #2f5c2c; 
+}

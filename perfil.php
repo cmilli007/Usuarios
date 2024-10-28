@@ -2,6 +2,13 @@
 include 'conexao.php'; 
 
 session_start();
+
+
+if (!isset($_SESSION['cd_cliente'])) {
+    header("Location: login.php"); 
+    exit();
+}
+
 $cd_cliente = $_SESSION['cd_cliente']; 
 
 // Recuperar informações do usuário
@@ -9,6 +16,12 @@ $queryUser = "SELECT * FROM tb_usuarios WHERE cd_cliente = ?";
 $stmtUser = $pdo->prepare($queryUser);
 $stmtUser->execute([$cd_cliente]);
 $userData = $stmtUser->fetch(PDO::FETCH_ASSOC);
+
+// Verifica se o usuário existe
+if (!$userData) {
+    echo "Usuário não encontrado.";
+    exit();
+}
 
 // Recuperar produtos do usuário
 $queryProducts = "SELECT * FROM tb_produto WHERE tb_usuarios_cd_cliente = ?";
@@ -36,7 +49,7 @@ $products = $stmtProducts->fetchAll(PDO::FETCH_ASSOC);
             <p><strong>CEP:</strong> <?php echo htmlspecialchars($userData['nr_cep']); ?></p>
         </div>
 
-         <h2>Meus Produtos</h2>
+        <h2>Meus Produtos</h2>
         <?php if (!empty($products)): ?>
             <?php foreach ($products as $product): ?>
                 <div class="product">
