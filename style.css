@@ -1,59 +1,62 @@
 body {
-    background-color: #F1FAF1; 
+    background-color: #F1FAF1;
 }
 
 .container {
-    font-family: "DM Sans", sans-serif; 
-    max-width: 800px; 
-    background-color: #ffffff; 
-    margin: 70px auto; 
-    border-radius: 5%; 
-    text-align: center; 
-    padding: 20px; 
+    font-family: "DM Sans", sans-serif;
+    max-width: 900px;
+    background-color: #ffffff;
+    margin: 50px auto;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
 h1 {
-    font-size: 36px; 
-    color: #0D7E2E; 
-    margin-bottom: 20px; 
+    font-size: 28px;
+    color: #0D7E2E;
+    text-align: center;
 }
 
 h2 {
-    font-family: "DM Sans", sans-serif; 
-    font-size: 30px; 
-    margin: 20px 0; 
+    font-size: 24px;
+    color: #0D7E2E;
+    border-bottom: 2px solid #0D7E2E;
+    padding-bottom: 10px;
+    margin-top: 30px;
+    text-align: left;
 }
 
 .user-info p {
-    font-size: 18px; 
-    margin: 5px 0; 
+    font-size: 18px;
+    margin: 8px 0;
 }
 
 .product {
-    border: 1px solid #ccc; 
-    padding: 15px;
-    margin-top: 10px; 
-    border-radius: 5%; 
-    background-color: #c3f6c3; 
-    text-align: left; 
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+    background-color: #c3f6c3;
 }
 
 strong {
-    color: #0D7E2E; 
+    color: #0D7E2E;
+    font-weight: bold;
 }
 
 .botao {
-    font-family: "DM Sans", sans-serif; 
-    margin-top: 20px; 
-    width: 70%; 
-    height: 40px; 
-    cursor: pointer; 
-    border-radius: 6%; 
-    background-color: #0D7E2E; 
-    color: white; 
-    border: none; 
+    font-family: "DM Sans", sans-serif;
+    margin-top: 20px;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 6px;
+    background-color: #0D7E2E;
+    color: white;
+    border: none;
 }
 
 .botao:hover {
-    background-color: #2f5c2c; 
+    background-color: #2f5c2c;
 }

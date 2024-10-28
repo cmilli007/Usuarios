@@ -2,27 +2,26 @@
 session_start();
 include 'conexao.php'; 
 
-// Verificar se o usuário está logado
+
 if (!isset($_SESSION['cd_cliente'])) {
-    header("Location: usuarios.html"); // Redireciona para a página de login se não estiver logado
+    header("Location: usuarios.html"); 
     exit();
 }
 
 $cd_cliente = $_SESSION['cd_cliente']; 
 
-// Recuperar informações do usuário
+
 $queryUser = "SELECT * FROM tb_usuarios WHERE cd_cliente = ?";
 $stmtUser = $pdo->prepare($queryUser);
 $stmtUser->execute([$cd_cliente]);
 $userData = $stmtUser->fetch(PDO::FETCH_ASSOC);
 
-// Verificar se o usuário foi encontrado
 if (!$userData) {
     echo "Usuário não encontrado.";
     exit();
 }
 
-// Recuperar produtos do usuário
+
 $queryProducts = "SELECT * FROM tb_produto WHERE tb_usuarios_cd_cliente = ?";
 $stmtProducts = $pdo->prepare($queryProducts);
 $stmtProducts->execute([$cd_cliente]);

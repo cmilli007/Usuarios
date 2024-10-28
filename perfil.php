@@ -1,33 +1,40 @@
 <?php
-include 'conexao.php'; 
+include 'conexao.php'; // Certifique-se de que o $pdo está definido corretamente
 
 session_start();
 
-
+// Verifica se o usuário está logado
 if (!isset($_SESSION['cd_cliente'])) {
-    header("Location: login.php"); 
+    header("Location: login.php");
     exit();
 }
 
-$cd_cliente = $_SESSION['cd_cliente']; 
+$cd_cliente = $_SESSION['cd_cliente'];
 
-// Recuperar informações do usuário
-$queryUser = "SELECT * FROM tb_usuarios WHERE cd_cliente = ?";
-$stmtUser = $pdo->prepare($queryUser);
-$stmtUser->execute([$cd_cliente]);
-$userData = $stmtUser->fetch(PDO::FETCH_ASSOC);
+try {
+    // Consulta para buscar os dados do usuário
+    $queryUser = "SELECT * FROM tb_usuarios WHERE cd_cliente = ?";
+    $stmtUser = $pdo->prepare($queryUser);
+    $stmtUser->execute([$cd_cliente]);
+    $userData = $stmtUser->fetch(PDO::FETCH_ASSOC);
 
-// Verifica se o usuário existe
-if (!$userData) {
-    echo "Usuário não encontrado.";
+    // Verifica se o usuário existe
+    if (!$userData) {
+        echo "Usuário não encontrado.";
+        exit();
+    }
+
+    // Consulta para buscar os produtos do usuário
+    $queryProducts = "SELECT * FROM tb_produto WHERE tb_usuarios_cd_cliente = ?";
+    $stmtProducts = $pdo->prepare($queryProducts);
+    $stmtProducts->execute([$cd_cliente]);
+    $products = $stmtProducts->fetchAll(PDO::FETCH_ASSOC);
+
+} catch (PDOException $e) {
+    // Tratamento de erro de conexão ou execução da query
+    echo "Erro: " . $e->getMessage();
     exit();
 }
-
-// Recuperar produtos do usuário
-$queryProducts = "SELECT * FROM tb_produto WHERE tb_usuarios_cd_cliente = ?";
-$stmtProducts = $pdo->prepare($queryProducts);
-$stmtProducts->execute([$cd_cliente]);
-$products = $stmtProducts->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -40,7 +47,7 @@ $products = $stmtProducts->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
     <div class="container">
-        <h1>Bem vindo(a), <?php echo htmlspecialchars($userData['nm_cliente']); ?>.</h1>
+        <h1>Bem-vindo(a), <?php echo htmlspecialchars($userData['nm_cliente']); ?>.</h1>
         <div class="user-info">
             <p><strong>Nome do Usuário:</strong> <?php echo htmlspecialchars($userData['nm_cliente']); ?></p>
             <p><strong>Email:</strong> <?php echo htmlspecialchars($userData['email']); ?></p>
@@ -58,7 +65,7 @@ $products = $stmtProducts->fetchAll(PDO::FETCH_ASSOC);
                     <p><strong>Data de Compra:</strong> <?php echo htmlspecialchars($product['dt_compra']); ?></p>
                     <p><strong>Condição:</strong> <?php echo htmlspecialchars($product['condicao_produto']); ?></p>
                     <p><strong>Descrição:</strong> <?php echo htmlspecialchars($product['ds_produto']); ?></p>
-                    <p><strong>Valor:</strong> R$ <?php echo htmlspecialchars($product['vl_produto']); ?></p>
+                    <p><strong>Valor:</strong> R$ <?php echo number_format($product['vl_produto'], 2, ',', '.'); ?></p>
                 </div> 
             <?php endforeach; ?>
         <?php else: ?>
