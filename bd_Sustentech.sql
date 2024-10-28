@@ -25,16 +25,13 @@ CREATE TABLE IF NOT EXISTS `bd_sustentech`.`tb_vendedores` (
   `nm_cliente` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   `nm_endereco` VARCHAR(45) NOT NULL,
-  `nr_endereco` CHAR (10) NOT NULL,
+  `nr_endereco` CHAR(10) NOT NULL,
   `nr_cep` CHAR(8) NOT NULL,
   `sg_estado` VARCHAR(2) NOT NULL,
   `nr_telefone` CHAR(9) NOT NULL,
-  `senha` TEXT NOT NULL,
+  `senha` VARCHAR(45) NOT NULL,
   `login` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`cd_cliente`))
-  ALTER TABLE tb_vendedores MODIFY nr_endereco CHAR (10);
-
-
 ENGINE = InnoDB;
 
 
@@ -44,18 +41,20 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `bd_sustentech`.`tb_empresa` (
   `cd_empresa` INT NOT NULL AUTO_INCREMENT,
   `nm_empresa` VARCHAR(255) NOT NULL,
-  `cnpj_empresa` CHAR(14) NOT NULL,
+  `cpnj_empresa` CHAR(14) NOT NULL,
   `nm_endereco` VARCHAR(45) NOT NULL,
   `nr_endereco` CHAR(4) NOT NULL,
   `nr_cep` CHAR(8) NOT NULL,
   `nr_telefone` CHAR(9) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
   `nm_responsavel` VARCHAR(45) NOT NULL,
   `cargo_responsavel` VARCHAR(45) NOT NULL,
   `email_responsavel` VARCHAR(45) NOT NULL,
-  `senha` TEXT NOT NULL,
+  `atividade_economica` CHAR(7) NULL,
+  `usuario` VARCHAR(45) NOT NULL,
+  `senha` VARCHAR(45) NOT NULL,
   `ds_servico` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`cd_empresa`))
-  ALTER TABLE tb_empresa CHANGE cpnj_empresa cnpj_empresa VARCHAR(14);
 ENGINE = InnoDB;
 
 
@@ -74,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `bd_sustentech`.`tb_Cooperativa` (
   `nr_cep` CHAR(8) NOT NULL,
   `ds_itensRecebidos` VARCHAR(45) NOT NULL,
   `user` VARCHAR(45) NOT NULL,
-  `senha` TEXT NOT NULL,
+  `senha` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`cd_corporativa`))
 ENGINE = InnoDB;
 
@@ -146,5 +145,42 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+use bd_sustentech;
+ALTER TABLE tb_produto
+DROP FOREIGN KEY fk_tb_produto_tb_Creciclagem1;
+ALTER TABLE tb_produto
+DROP COLUMN tb_Creciclagem_cd_corporativa;
+
+drop table tb_cooperativa;
+
+alter table tb_tags
+drop column Smartphone ,
+drop column Notebooks ;
+ 
+ALTER TABLE tb_produto
+DROP FOREIGN KEY fk_tb_produto_tb_tags1;
+ALTER TABLE tb_produto
+DROP COLUMN tb_tags_id;
+
+USE bd_sustentech;
+
+CREATE TABLE tb_tags (
+    id_tag INT AUTO_INCREMENT PRIMARY KEY,
+    nm_tag VARCHAR(50) NOT NULL
+);
+
+drop table tb_cooperativa;
+
+use bs_sustentech;
+alter table tb_vendedores;
+ALTER TABLE tb_vendedores RENAME TO tb_usuarios;
+ALTER TABLE tb_vendedores
+MODIFY COLUMN nr_telefone char(11);
+
+
+
+
+
 
 

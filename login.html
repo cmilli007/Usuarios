@@ -29,7 +29,7 @@
             margin-bottom: 10px;
             outline: none;
         }
-        .botao {
+        button {
             font-family: "DM Sans", sans-serif;
             margin-top: 20px;
             width: 70%;
@@ -39,7 +39,7 @@
             background-color: #0D7E2E;
             color: white;
         }
-        .botao:hover {
+        button {
             background-color: #2f5c2c;
         }
         h2 {
@@ -53,12 +53,10 @@
     <div class="login">
         <h1>Login</h1>
         <form method="POST" action="login.php">
-            <input type="text" name="nm_cliente" placeholder="Nome" required><br>
-
-            <input type="password" name="senha" placeholder="Senha" required> <br>
-
-            <input class="botao" type="submit" value="Entrar">
-        </form>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="senha" placeholder="Senha" required>
+            <button type="submit">Login</button>
+        </form>        
     </div>
 </body>
 </html>
