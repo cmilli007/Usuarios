@@ -1,39 +1,64 @@
 <?php
-include 'conexao.php'; // Inclua o arquivo de conexão com o banco
-session_start();
+require 'vendor/autoload.php'; // Certifique-se de que o autoload do Composer está incluído
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+// Verifique se o método de requisição é POST
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $email = $_POST['email'];
 
-    // Verifica se o e-mail existe no banco de dados
-    $stmt = $pdo->prepare("SELECT cd_cliente FROM tb_usuarios WHERE email = ?");
-    $stmt->execute([$email]);
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    // Conectar ao banco de dados
+    $conn = new mysqli("localhost", "root", "root", "bd_sustentech");
 
-    if ($user) {
-        // Gera um token único e um tempo de expiração
-        $token = bin2hex(random_bytes(50)); // Token de 50 caracteres
-        $expira_em = date("Y-m-d H:i:s", strtotime('+1 hour')); // Expira em 1 hora
+    // Verifique se a conexão foi bem-sucedida
+    if ($conn->connect_error) {
+        die("Conexão falhou: " . $conn->connect_error);
+    }
 
-        // Salva o token no banco de dados junto com o email
-        $stmt = $pdo->prepare("INSERT INTO tb_redefinicao_senha (email, token, expira_em) VALUES (?, ?, ?)");
-        $stmt->execute([$email, $token, $expira_em]);
+    // Preparar a consulta para verificar se o e-mail existe
+    $stmt = $conn->prepare("SELECT cd_cliente FROM tb_usuarios WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    
+    // Executar a consulta
+    $stmt->execute();
+    $result = $stmt->get_result(); // Obter o resultado da consulta
 
-        // Link de redefinição de senha
-        $link = "http://seusite.com/redefinir_senha.php?token=" . $token;
+    // Verificar se o e-mail existe
+    if ($result->num_rows === 1) {
+        $token = bin2hex(random_bytes(50));
+        // Atualizar o token no banco de dados
+        $stmt = $conn->prepare("UPDATE tb_usuarios SET reset_token = ? WHERE email = ?");
+        $stmt->bind_param("ss", $token, $email);
+        $stmt->execute();
 
-        // Enviar o e-mail (usando mail(), PHPMailer ou outro método de envio de e-mail)
-        $assunto = "Redefinição de senha";
-        $mensagem = "Clique no link para redefinir sua senha: " . $link;
-        $headers = "From: suporte@seusite.com";
+        $mail = new PHPMailer(true);
+        try {
+            // Configurações do PHPMailer
+            $mail->isSMTP();
+            $mail->Host = 'localhost'; // Servidor SMTP local
+            $mail->SMTPAuth = false; // Desativa a autenticação
+            $mail->Port = 25; // Porta padrão
 
-        if (mail($email, $assunto, $mensagem, $headers)) {
-            echo "Um e-mail foi enviado para redefinir sua senha.";
-        } else {
-            echo "Erro ao enviar o e-mail.";
+            $mail->setFrom('camili.costams@gmail.com', 'Seu Nome'); // Defina um remetente válido
+            ; // Defina o remetente
+            $mail->addAddress($email); // Defina o destinatário
+
+            $resetLink = "http://localhost/redefinir_senha.php?token=" . $token;
+            $mail->isHTML(true);
+            $mail->Subject = 'Redefinição de Senha';
+            $mail->Body = "Clique no link para redefinir sua senha: <a href='$resetLink'>$resetLink</a>";
+
+            $mail->send(); // Tente enviar o e-mail
+            echo 'Um link de redefinição foi enviado para seu e-mail.';
+        } catch (Exception $e) {
+            echo "Erro ao enviar e-mail: {$mail->ErrorInfo}";
         }
     } else {
-        echo "E-mail não encontrado.";
+        echo "E-mail não encontrado."; // Mensagem se o e-mail não estiver no banco de dados
     }
+
+    // Fechar a conexão
+    $stmt->close();
+    $conn->close();
 }
 ?>

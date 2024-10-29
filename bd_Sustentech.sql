@@ -179,6 +179,43 @@ ALTER TABLE tb_vendedores
 MODIFY COLUMN nr_telefone char(11);
 
 
+ALTER TABLE `bd_sustentech`.`tb_produto`
+DROP FOREIGN KEY `fk_tb_produto_tb_vendedores`;
+
+-- Adicionar as foreign keys com o nome atualizado
+ALTER TABLE `bd_Sustentech`.`tb_produto`
+ADD CONSTRAINT `fk_tb_produto_tb_usuarios`
+  FOREIGN KEY (`tb_usuarios_cd_cliente`)
+  REFERENCES `bd_sustentech`.`tb_usuarios` (`cd_cliente`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+  
+  -- Renomeie a coluna para refletir o novo nome
+ALTER TABLE `bd_Sustentech`.`tb_produto`
+  CHANGE COLUMN `tb_vendedores_cd_cliente` `tb_usuarios_cd_cliente` INT NULL;
+
+-- Agora adicione a nova constraint com o nome atualizado
+ALTER TABLE `bd_Sustentech`.`tb_produto`
+  ADD CONSTRAINT `fk_tb_produto_tb_usuarios`
+  FOREIGN KEY (`tb_usuarios_cd_cliente`)
+  REFERENCES `bd_sustentech`.`tb_usuarios` (`cd_cliente`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+  use bd_sustentech;
+  CREATE TABLE tb_redefinicao_senha (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) NOT NULL,
+    token VARCHAR(255) NOT NULL,
+    expira_em DATETIME NOT NULL
+);
+use bd_sustentech;
+drop table tb_redefinicao_senha;
+
+alter table tb_usuarios 
+ADD COLUMN reset_token VARCHAR(100);
+
+
+
 
 
 
