@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $mail->SMTPAuth = false; // Desativa a autenticação
             $mail->Port = 25; // Porta padrão
 
-            $mail->setFrom('camili.costams@gmail.com', 'Seu Nome'); // Defina um remetente válido
+            $mail->setFrom('juliana.brrs002@gmail.com', 'Seu Nome'); // Defina um remetente válido
             ; // Defina o remetente
             $mail->addAddress($email); // Defina o destinatário
 

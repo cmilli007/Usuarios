@@ -23,7 +23,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $sg_estado = trim($_POST["sg_estado"]);
     $nr_cep = trim($_POST["nr_cep"]);
     $nr_telefone = trim($_POST["nr_telefone"]);
-    $login = trim($_POST["login"]);
     $senha = $_POST["senha"];
     $ConfirmaSenha = $_POST["ConfirmaSenha"];
 
@@ -46,14 +45,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             exit();
         } else {
             
-            $insert = "INSERT INTO tb_usuarios (nm_cliente, login, nm_endereco, nr_endereco, sg_estado, email, nr_cep, nr_telefone, senha) 
-                       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $insert = "INSERT INTO tb_usuarios (nm_cliente, nm_endereco, nr_endereco, sg_estado, email, nr_cep, nr_telefone, senha) 
+                       VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $conn->prepare($insert);
-            $stmt->bind_param("sssssssss", $nm_cliente, $login, $nm_endereco, $nr_endereco, $sg_estado, $email, $nr_cep, $nr_telefone, $hashsenha);
+            $stmt->bind_param("ssssssss", $nm_cliente, $nm_endereco, $nr_endereco, $sg_estado, $email, $nr_cep, $nr_telefone, $hashsenha);
 
             if ($stmt->execute()) {
                 
-                header("Location: perfil.php"); 
+                header("Location: login.html"); 
                 exit();
             } else {
             

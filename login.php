@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         } else {
             
             $mensagemErro = "Usuário não encontrado.";
-            header("Location: usuarios.html?mensagem=" . urlencode($mensagemErro));
+            header("Location: erro_login.php?mensagem=" . urlencode($mensagemErro));
             exit();
         }
         
